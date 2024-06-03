@@ -6,6 +6,14 @@ orbs:
   aws-ecr: circleci/aws-ecr@9.0.4
   aws-ecs: circleci/aws-ecs@4.0.0
 
+parameters:
+  role-arn:
+    type: string
+    default: arn:aws:iam::992382483259:role/ambassador
+  aws-name:
+    type: string
+    default: ambassador
+
 commands:
   run-pytest:
     description: "Run PyTest"
@@ -173,7 +181,7 @@ jobs:
       - load-docker-image
       - aws-cli/setup:
           profile_name: default
-          role_arn: arn:aws:iam::992382483259:role/ambassador
+          role_arn: << pipeline.parameters.role-arn >>
           role_session_name: example-session
       - aws-ecr/ecr_login:
           public_registry: true
@@ -189,7 +197,7 @@ jobs:
           tag: latest-$(docker version -f {{.Server.Arch}}),${CIRCLE_SHA1}-$(docker version -f {{.Server.Arch}})
     environment:
       DOCKER_IMAGE: multi-arch-circleci-demo
-      ECR_REPO: ambassador
+      ECR_REPO: << pipeline.parameters.aws-name >>
 
   publish-manifest:
     executor: amd64
@@ -197,7 +205,7 @@ jobs:
       - enable-docker-experimental
       - aws-cli/setup:
           profile_name: default
-          role_arn: arn:aws:iam::992382483259:role/ambassador
+          role_arn: << pipeline.parameters.role-arn >>
           role_session_name: example-session
       - aws-ecr/ecr_login:
           public_registry: true
@@ -224,7 +232,7 @@ jobs:
             docker manifest push public.ecr.aws/${AWS_ECR_PUBLIC_REGISTRY_ALIAS}/${ECR_REPO}:latest
     environment:
       DOCKER_IMAGE: multi-arch-circleci-demo
-      ECR_REPO: ambassador
+      ECR_REPO: << pipeline.parameters.aws-name >>
 
 
 workflows:
@@ -261,12 +269,12 @@ workflows:
           auth:
             - aws-cli/setup:
                 profile_name: default
-                role_arn: arn:aws:iam::992382483259:role/ambassador
+                role_arn: << pipeline.parameters.role-arn >>
                 role_session_name: example-session
-          cluster: ambassador
-          container_image_name_updates: container=ambassador-amd,image-and-tag=public.ecr.aws/${AWS_ECR_PUBLIC_REGISTRY_ALIAS}/ambassador:${CIRCLE_SHA1}
-          family: ambassador-amd
-          service_name: ambassador-amd
+          cluster: << pipeline.parameters.aws-name >>
+          container_image_name_updates: container=<< pipeline.parameters.aws-name >>-amd,image-and-tag=public.ecr.aws/${AWS_ECR_PUBLIC_REGISTRY_ALIAS}/<< pipeline.parameters.aws-name >>:${CIRCLE_SHA1}
+          family: << pipeline.parameters.aws-name >>-amd
+          service_name: << pipeline.parameters.aws-name >>-amd
           profile_name: default
           requires:
             - "Publish Manifest to ECR"
@@ -274,12 +282,12 @@ workflows:
           auth:
             - aws-cli/setup:
                 profile_name: default
-                role_arn: arn:aws:iam::992382483259:role/ambassador
+                role_arn: << pipeline.parameters.role-arn >>
                 role_session_name: example-session
-          cluster: ambassador
-          container_image_name_updates: container=ambassador-arm,image-and-tag=public.ecr.aws/${AWS_ECR_PUBLIC_REGISTRY_ALIAS}/ambassador:${CIRCLE_SHA1}
-          family: ambassador-arm
-          service_name: ambassador-arm
+          cluster: << pipeline.parameters.aws-name >>
+          container_image_name_updates: container=<< pipeline.parameters.aws-name >>-arm,image-and-tag=public.ecr.aws/${AWS_ECR_PUBLIC_REGISTRY_ALIAS}/<< pipeline.parameters.aws-name >>:${CIRCLE_SHA1}
+          family: << pipeline.parameters.aws-name >>-arm
+          service_name: << pipeline.parameters.aws-name >>-arm
           profile_name: default
           requires:
             - "Publish Manifest to ECR"
