@@ -5,12 +5,12 @@ Welcome to the second hands-on lab for the CircleCI Boot Camp! This repository c
 
 ## Prerequisites
 
-Before starting this lab, please complete lab 1, "[From Zero to Hero: Mastering CI/CD Pipelines with CircleCI](../lab-1/README.md). Or if you are looking to get up and running quick please refer to [milestone 0](./milestones/0/README.md).
+Before starting this lab, please complete lab 1, [From Zero to Hero: Mastering CI/CD Pipelines with CircleCI](../lab-1/README.md). Or if you are looking to get up and running quick please refer to [milestone 0](./milestones/0/README.md).
 Milestone 0 is an optional milestone for those who did not complete lab 1 but want to complete lab 2 straight away. 
 
 Ensure you have the following prerequisites:
 
-- **Recommended:** Completion of the first lab, "[From Zero to Hero: Mastering CI/CD Pipelines with CircleCI](../lab-1/README.md). 
+- **Recommended:** Completion of the first lab, [From Zero to Hero: Mastering CI/CD Pipelines with CircleCI](../lab-1/README.md). 
 - CircleCI Account
 - AWS Account: Resources will be deployed in the lab via CloudFormation. Ensure you have access to an AWS account.
 - GitHub Account: You'll need a GitHub account to fork certain repositories
