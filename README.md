@@ -1,8 +1,8 @@
-# Welcome to the CircleCI AWS Ambassador Program
+# Welcome to the CircleCI Boot Camp
 
-Welcome to CircleCI's AWS Ambassador Program! This program is designed for AWS Solution Architects seeking to familiarize themselves with CircleCI and understand how CircleCI can provide value for their customers.
+Welcome to CircleCI's Boot Camp! This program is designed for engineers seeking to familiarize themselves with CircleCI.
 
-By the end of the program, you should be equipped to discuss with customers what CircleCI is, where it fits in, and the value it provides. Further follow-up sessions will focus on specific features or use cases.
+By the end of the program, you should know what CircleCI is, where it fits in, and the value it provides.
 
 ## Lab Structure
 
@@ -22,4 +22,4 @@ Each lab is divided into milestones. In the Lab 1 and Lab 2 folders, you will fi
 
 ## Ready to Get Started?
 
-Take the first step towards mastery by exploring [Lab 1](/lab-1/README.md) and embarking on your journey with CircleCI and AWS. Let's revolutionize software delivery together!
+Take the first step towards mastery by exploring [Lab 1](/lab-1/README.md) and embarking on your journey with CircleCI. Let's revolutionize software delivery together!
