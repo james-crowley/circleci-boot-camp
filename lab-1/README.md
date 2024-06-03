@@ -1,6 +1,6 @@
-# AWS Ambassador - From Zero to Hero: Mastering CI/CD Pipelines with CircleCI 
+# From Zero to Hero: Mastering CI/CD Pipelines with CircleCI 
 
-Welcome to the first hands-on lab for the AWS Ambassador CircleCI program! This repository contains all the code needed to complete the lab titled "From Zero to Hero: Mastering CI/CD Pipelines with CircleCI." The focus of this lab is to familiarize users with the nuts and bolts of CircleCI, particularly the developer experience when onboarding a new project to CircleCI. Throughout the lab, participants will progress from setting up a brand new project on CircleCI to establishing a full production CI/CD pipeline.
+Welcome to the first hands-on lab for the CircleCI Boot Camp! This repository contains all the code needed to complete the lab titled "From Zero to Hero: Mastering CI/CD Pipelines with CircleCI." The focus of this lab is to familiarize users with the nuts and bolts of CircleCI, particularly the developer experience when onboarding a new project to CircleCI. Throughout the lab, participants will progress from setting up a brand new project on CircleCI to establishing a full production CI/CD pipeline.
 
 ## Prerequisites
 
