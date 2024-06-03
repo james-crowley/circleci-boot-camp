@@ -6,7 +6,7 @@ This milestone is optional and is designed for participants who have not complet
 ### Steps
 
 1. **Fork GitHub Repository:**
-   - Fork the GitHub repository [aws-ambassador](https://github.com/CircleCI-Labs/aws-ambassador) to your own GitHub account.
+   - Fork the GitHub repository [circleci-boot-camp](https://github.com/CircleCI-Labs/circleci-boot-camp) to your own GitHub account.
 
 2. **Sign Up for CircleCI Account:**
    - Navigate to the [CircleCI sign up page](https://circleci.com/signup/).
