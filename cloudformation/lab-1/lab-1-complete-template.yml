@@ -7,13 +7,6 @@ Parameters:
     Description: CircleCI organization id (UUID)
     MinLength: 36 # must be formatted with hyphens
     MaxLength: 36
-  CertificateThumbprint:
-    Type: String
-    Default: 9e99a48a9960b14926bb7f3b02e22da2b0ab7280
-    Description: Thumbprint of the Certificate for oidc.circleci.com (SHA1)
-    AllowedPattern: ^[0-9a-fA-F]*$ # hexadecimal
-    MinLength: 40
-    MaxLength: 40
   RepositoryName:
     Type: String
     Description: "Name of the ECR Public Repository"
@@ -45,28 +38,6 @@ Parameters:
     Type: List<AWS::EC2::Subnet::Id>
     Description: "IDs of the Subnets to be used"
 Resources:
-  IdentityProvider:
-    Type: AWS::IAM::OIDCProvider
-    Properties:
-      Tags: 
-        - Key: "cost-center"
-          Value: "sm"
-        - Key: "Team"
-          Value: "Customer Engineering"
-        - Key: "asset-criticality"
-          Value: "false"
-        - Key: "optimization-opt-in"
-          Value: "false"
-        - Key: "iac"
-          Value: "true"
-        - Key: "owner"
-          Value: "field@circleci.com"
-      ClientIdList:
-        - !Ref OrgId
-      Url: !Sub 'https://oidc.circleci.com/org/${OrgId}'
-      ThumbprintList:
-        - !Ref CertificateThumbprint
-
   IAMRole:
     Type: AWS::IAM::Role
     Properties:
@@ -104,7 +75,7 @@ Resources:
                 }
               ]
           }
-        - IdPArn: !GetAtt IdentityProvider.Arn
+        - IdPArn: arn:aws:iam::654654271298:oidc-provider/oidc.circleci.com/org/f8b4466a-aaf8-41b4-8224-e1c24d295701
           OrgId: !Ref OrgId
       ManagedPolicyArns: 
         - "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess"
