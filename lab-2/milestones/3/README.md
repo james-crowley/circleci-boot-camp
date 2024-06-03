@@ -1,56 +1,48 @@
-## Milestone 3: Implementing Config Policies for Enhanced Pipeline Governance
+## Milestone 3: Exploring CircleCI's Runners
 
 ### Overview
 
-In this milestone, we will explore the implementation of config policies, a powerful feature in CircleCI that allows you to enforce organization-level rules and scopes governing configuration elements.
+CircleCI's runners offer customers the flexibility to bring their own fleet of machines, enabling a hybrid model that combines CircleCI's compute resources with the customer's own infrastructure. This approach allows users to leverage CircleCI's compute where appropriate while utilizing their own resources where necessary. Often, customers employ runners to bridge networking gaps between CircleCI's network and their own, or to execute tests on specific hardware such as IoT or embedded devices.
 
-Config policies evaluate a `config.yml` file before executing any pipeline. During evaluation, the `config.yml` is scanned to check for compliance with defined policies.
+CircleCI provides two types of runners: Machine runners, which emulate machine-based executors like Windows, MacOS, and Linux, and Container runners, which emulate the Docker executor. Machine runners are typically installed on a virtual machine (VM) or bare metal server, while container runners require installation within a Kubernetes cluster.
 
-These policies can be organization-wide, targeted to specific groups, or applied to individual projects. Built on the Open Policy Agent (OPA) framework, config policies are constructed in the Rego language.
+In this milestone, we will explore the usage of a Machine Runner hosted on an EC2 instance.
 
-Config policies have three possible outcomes:
-- **Pass**: If no violations are found, the pipeline proceeds as usual.
-- **Hard Failure**: Violations result in a complete blockage of pipeline execution. No jobs are spawned or processed.
-- **Soft Failure**: Pipeline execution continues, but violations are noted in the audit log. A message is displayed in the UI, alerting users to the policy violation. The messages can be customized within the policy itself.
+### Steps
 
-Hard failures are useful for ensuring critical pipeline components always run, such as security scanning or restricting the use of production secrets to specific branches.
+1. **Run CloudFormation Template:**
+   - Execute the [provided CloudFormation template](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https%3A%2F%2Fcircleci-bootcamp.s3.amazonaws.com%2Flab-2-complete-template.yml&stackName=lab2-complete&param_SecurityGroupName=ambassador-vm&param_VpcID=&param_EC2Name=ambassador-vm&param_SubnetID=&param_EC2KeyPair=) to provision the EC2 Machine. Ensure that you have a key pair already configured with AWS.
 
-Soft failures serve to warn users of policy violations without halting their progress. They are often used for gradually rolling out policies to the enterprise, giving users time to adjust their workflows before enforcement becomes strict.
+2. **Verify SSH Access:**
+   - Once the EC2 instance is up and running, verify that you can SSH into the instance using your key pair.
 
-All policy events are logged in the audit log, allowing administrators to review violations and offer assistance or address any issues users may encounter.
+3. **Create a Runner Resource Class and Token via CircleCI UI:**
+   - Navigate to your organization settings, then to self-hosted runners on the CircleCI's UI. You need to agree to the self-hosted runner terms to utilize CircleCI's runners.
+   - Then navigate to the Self-hosted runner tab on CircleCI's UI
+   - From here follow the prompts and save the runner token at the end! Make sure to also note your namespace and resource class name, you will need those for later.
+   - Install the agent on the EC2 machine and execute any required setup scripts. Additionally, ensure that Docker is installed on the EC2 instance.
 
-In today's labs, we aim to enforce the following:
-1. Ensure that contexts are used only within our project.
-2. Enforce the inclusion of security integrations in the pipeline and prevent users from removing security scans.
+4. **Install CircleCI Machine Runner 3.0 on EC2 Machine:**
+   - Install the agent on the EC2 machine using the [Install CircleCI Runner](https://circleci.com/docs/install-machine-runner-3-on-linux/#install-circleci-runner)
+   - Also please install Docker by using the commands shown on [Install using the apt repository](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
+   - Lastly, make sure to give the `circleci` user access to run docker commands by issuing `sudo usermod -aG docker circleci` and restart the service by issuing `sudo systemctl restart circleci-runner`
+   - Verify the CircleCI runner is reporting back to CircleCI by going to the self-hosted runners tab in CircleCI's UI
 
-### Steps:
+5. **Update config.yml:**
+   - Modify the configuration file (config.yml) of your project to utilize the runner. Make sure to fill in your namespace and resource class name in the config. 
 
-1. **Install the CircleCI CLI**
-   - Install the CircleCI Command Line Interface (CLI) to enable command-line management of CircleCI resources.
-   - Install instructions can be found on [Install and Configure the CircleCI Local CLI](https://circleci.com/docs/local-cli/#installation)
-   - Generate a Personal API Token to finish setting up the CircleCI - [Configure the CLI](https://circleci.com/docs/local-cli/#configure-the-cli)
+6. **Execute Config:**
+   - Once the configuration file is updated, execute the modified configuration to trigger the pipeline.
 
-2. **Enable Config Policies via CircleCI CLI**
-   - With the CLI setup, use the CircleCI CLI to enable config policies for the organization using the docs found [here](https://circleci.com/docs/create-and-manage-config-policies/#config-policy-management-enablement)
+7. **Verify Test Results:**
+   - Verify the test results by accessing the public IP address of your Runner and observing the application running.
 
-3. **Apply Security Scan Usage Policy & Context Policy**
-   - Define a policy to enforce the usage of security scans in the pipeline.
-   - Define a policy to restrict the usage of contexts to our project only.
-   - Apply the policies via the CLI by issuing `circleci policy push /PATH_POLICES_FOLDER --owner-id ORG-ID`. The policy folder path will be this milestone's folder with the
-      policy files and your ORG-ID is the organization ID for your CircleCI account. See [Push up your policy bundle](https://circleci.com/docs/create-and-manage-config-policies/#push-up-your-policy-bundle) for more information.
+### Objectives
 
-4. **Verify Policy Application via UI**
-   - Check the CircleCI UI to ensure that the polices has been successfully applied.
-
-5. **Test Policy by Removing a Security Job**
-   - Attempt to remove a security-related job from the pipeline configuration to verify policy enforcement.
-   - Attempt to use "production" context in the pipeline to verify policy enforcement.
-
-6. **View Audit Log and UI**
-   - Review the audit log and CircleCI UI to verify that policies are functioning as expected and that violations are appropriately logged and displayed.
-
-### Objectives:
-- Successfully enable and apply config policies using the CircleCI CLI.
-- Define and implement policies to enforce security scan usage and context usage restrictions.
-- Verify policy enforcement through testing and validation steps.
-- Confirm policy compliance through audit log and UI review.
+- Successfully provision an EC2 instance using the provided CloudFormation template.
+- Verify SSH access to the provisioned EC2 instance.
+- Install the CircleCI runner agent on the EC2 instance and complete any necessary setup.
+- Update the runner configuration on the EC2 instance with the runner token.
+- Modify the project's configuration file (config.yml) to utilize the runner.
+- Execute the modified configuration and observe the pipeline execution.
+- Verify the test results by accessing the public IP address of the Runner.

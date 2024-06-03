@@ -270,3 +270,16 @@ workflows:
           profile_name: default
           requires:
             - "Publish Manifest to ECR"
+      - aws-ecs/deploy_service_update:
+          auth:
+            - aws-cli/setup:
+                profile_name: default
+                role_arn: arn:aws:iam::992382483259:role/ambassador
+                role_session_name: example-session
+          cluster: ambassador
+          container_image_name_updates: container=ambassador-arm,image-and-tag=public.ecr.aws/${AWS_ECR_PUBLIC_REGISTRY_ALIAS}/ambassador:${CIRCLE_SHA1}
+          family: ambassador-arm
+          service_name: ambassador-arm
+          profile_name: default
+          requires:
+            - "Publish Manifest to ECR"

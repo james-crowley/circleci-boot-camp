@@ -1,48 +1,46 @@
-## Milestone 4: Exploring CircleCI's Runners
+## Milestone 4: Harnessing Insights, Metrics, and Backend Visibility
 
-### Overview
+As we continue our journey with CircleCI, the need for gaining insights into our CI/CD processes becomes paramount. Understanding how our pipelines evolve over time and having access to crucial data are essential elements for informed decision-making and continuous improvement. CircleCI provides robust solutions for these needs through its Insights dashboard and integrations with external systems.
 
-CircleCI's runners offer customers the flexibility to bring their own fleet of machines, enabling a hybrid model that combines CircleCI's compute resources with the customer's own infrastructure. This approach allows users to leverage CircleCI's compute where appropriate while utilizing their own resources where necessary. Often, customers employ runners to bridge networking gaps between CircleCI's network and their own, or to execute tests on specific hardware such as IoT or embedded devices.
+### CircleCI Insights Dashboard
+CircleCI Insights is seamlessly integrated into the platform, providing a comprehensive overview of your organization's build activities. With just a few clicks, users gain access to a wealth of information presented in an intuitive and digestible dashboard format. 
 
-CircleCI provides two types of runners: Machine runners, which emulate machine-based executors like Windows, MacOS, and Linux, and Container runners, which emulate the Docker executor. Machine runners are typically installed on a virtual machine (VM) or bare metal server, while container runners require installation within a Kubernetes cluster.
+### Organization-Level Metrics
+Starting at the organization level, CircleCI Insights offers aggregated metrics that offer a high-level perspective on the overall health and performance of your projects. This bird's-eye view enables stakeholders to assess the collective impact of their CI/CD efforts.
 
-In this milestone, we will explore the usage of a Machine Runner hosted on an EC2 instance.
+### Project-Specific Insights
+Drilling down into individual projects, users can access metrics tailored specifically to their repository. This level of granularity allows for a focused analysis of project performance and resource utilization.
 
-### Steps
+### Workflow and Job Analytics
+CircleCI Insights provides detailed insights into workflows and individual job executions. Users can examine metrics at the workflow level and delve into specific jobs to gain deeper insights into resource consumption and execution times.
 
-1. **Run CloudFormation Template:**
-   - Execute the [provided CloudFormation template](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https%3A%2F%2Fcircleci-bootcamp.s3.amazonaws.com%2Flab-2-complete-template.yml&stackName=lab2-complete&param_SecurityGroupName=ambassador-vm&param_VpcID=&param_EC2Name=ambassador-vm&param_SubnetID=&param_EC2KeyPair=) to provision the EC2 Machine. Ensure that you have a key pair already configured with AWS.
+### Test-Level Insights
+For developers seeking to optimize their testing efforts, CircleCI offers test-level insights. By highlighting areas such as flaky tests, failing tests, and slowest tests, developers can prioritize their efforts more effectively, leading to improved testing efficiency.
 
-2. **Verify SSH Access:**
-   - Once the EC2 instance is up and running, verify that you can SSH into the instance using your key pair.
+### Integration Capabilities
+For organizations already invested in logging and monitoring platforms like Grafana, ELK, Sumo Logic, New Relic or Datadog, CircleCI offers seamless integration through APIs and webhooks. Users can fetch data via APIs or configure webhooks to send data directly to their preferred platforms, ensuring compatibility and flexibility.
 
-3. **Create a Runner Resource Class and Token via CircleCI UI:**
-   - Navigate to your organization settings, then to self-hosted runners on the CircleCI's UI. You need to agree to the self-hosted runner terms to utilize CircleCI's runners.
-   - Then navigate to the Self-hosted runner tab on CircleCI's UI
-   - From here follow the prompts and save the runner token at the end! Make sure to also note your namespace and resource class name, you will need those for later.
-   - Install the agent on the EC2 machine and execute any required setup scripts. Additionally, ensure that Docker is installed on the EC2 instance.
+### Backstage Integration
+As internal Developer Platforms (IDPs) gain traction in large enterprises, CircleCI offers official integration with Backstage. This integration provides valuable insights into pipeline performance, further enhancing the visibility and management of CI/CD processes.
 
-4. **Install CircleCI Machine Runner 3.0 on EC2 Machine:**
-   - Install the agent on the EC2 machine using the [Install CircleCI Runner](https://circleci.com/docs/install-machine-runner-3-on-linux/#install-circleci-runner)
-   - Also please install Docker by using the commands shown on [Install using the apt repository](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
-   - Lastly, make sure to give the `circleci` user access to run docker commands by issuing `sudo usermod -aG docker circleci` and restart the service by issuing `sudo systemctl restart circleci-runner`
-   - Verify the CircleCI runner is reporting back to CircleCI by going to the self-hosted runners tab in CircleCI's UI
+### Steps:
+1. Navigate to CircleCI's Insights dashboard.
+2. Explore organization-level metrics.
+3. Review project-specific metrics.
+4. Examine workflow and job level insights.
+5. Investigate test-level insights.
+6. Explore CircleCI's APIs for data retrieval.
+7. Explore CircleCI's third-party integrations for logging and alerting.
+8. Explore CircleCI's integration with Backstage for enhanced visibility into pipeline performance.
 
-5. **Update config.yml:**
-   - Modify the configuration file (config.yml) of your project to utilize the runner. Make sure to fill in your namespace and resource class name in the config. 
+### Objectives:
+- Gain familiarity with CircleCI's Insights dashboard.
+- Understand how to interpret organization-level metrics.
+- Analyze project-specific metrics to assess repository health.
+- Utilize workflow and job analytics for performance optimization.
+- Explore test-level insights to prioritize testing efforts.
+- Learn to fetch data via CircleCI's APIs.
+- Configure webhooks for seamless integration with third-party platforms.
+- Explore integration with Backstage for centralized pipeline management.
 
-6. **Execute Config:**
-   - Once the configuration file is updated, execute the modified configuration to trigger the pipeline.
 
-7. **Verify Test Results:**
-   - Verify the test results by accessing the public IP address of your Runner and observing the application running.
-
-### Objectives
-
-- Successfully provision an EC2 instance using the provided CloudFormation template.
-- Verify SSH access to the provisioned EC2 instance.
-- Install the CircleCI runner agent on the EC2 instance and complete any necessary setup.
-- Update the runner configuration on the EC2 instance with the runner token.
-- Modify the project's configuration file (config.yml) to utilize the runner.
-- Execute the modified configuration and observe the pipeline execution.
-- Verify the test results by accessing the public IP address of the Runner.
