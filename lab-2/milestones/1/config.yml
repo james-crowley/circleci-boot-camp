@@ -278,8 +278,8 @@ workflows:
           name: "Scan << matrix.architecture >> Container Image"
           matrix:
             parameters:
-              architecture: ["arm64", "amd64"]
-              os-type: ["linux-arm64", "linux"]
+              architecture: ["amd64"]
+              os-type: ["linux"]
             exclude:
               - architecture: "arm64"
                 os-type: "linux"
@@ -296,7 +296,7 @@ workflows:
           requires:
             - "Testing << matrix.architecture >> Container Image"
             - "Testing Python Code"
-            - "Scan << matrix.architecture >> Container Image"
+            - "Scan amd64 Container Image"
       - publish-manifest:
           name: "Publish Manifest to ECR"
           requires:
