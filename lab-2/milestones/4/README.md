@@ -11,7 +11,7 @@ In this milestone, we will explore the usage of a Machine Runner hosted on an EC
 ### Steps
 
 1. **Run CloudFormation Template:**
-   - Execute the [provided CloudFormation template](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://aws-ambassador-labs.s3.amazonaws.com/lab-2-complete-template.yml&stackName=AWS-Ambassador-Lab-2-Complete&param_SecurityGroupName=ambassador-vm&param_VpcID=&param_EC2Name=ambassador-vm&param_EC2KeyPair=) to provision the EC2 Machine. Ensure that you have a key pair already configured with AWS.
+   - Execute the [provided CloudFormation template](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https%3A%2F%2Fcircleci-bootcamp.s3.amazonaws.com%2Flab-2-complete-template.yml&stackName=lab2-complete&param_SecurityGroupName=ambassador-vm&param_VpcID=&param_EC2Name=ambassador-vm&param_SubnetID=&param_EC2KeyPair=) to provision the EC2 Machine. Ensure that you have a key pair already configured with AWS.
 
 2. **Verify SSH Access:**
    - Once the EC2 instance is up and running, verify that you can SSH into the instance using your key pair.

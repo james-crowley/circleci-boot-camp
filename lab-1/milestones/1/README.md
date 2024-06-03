@@ -24,7 +24,7 @@ Additionally, we will spin up some AWS infrastructure that will be utilized late
 
 5. **Deploy AWS Infrastructure using Cloud:**
    - Before deploying AWS infrastructure, navigate to CircleCI's UI and click Organization Settings. Select the Overview section, and copy Organization ID shown.
-   - Next utilize [this CloudFormation Link](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://aws-ambassador-labs.s3.amazonaws.com/lab-1-starter-template.yml&stackName=AWS-Ambassador-Lab-1-Starter&param_OrgId=&param_LoadBalancerName=ambassador&param_RoleName=ambassador&param_CertificateThumbprint=9e99a48a9960b14926bb7f3b02e22da2b0ab7280&param_SecurityGroupName=ambassador&param_VpcID=&param_ECSTaskExecutionRole=ecsTaskExecutionRoleAmbassador&param_ClusterName=ambassador&param_RepositoryName=ambassador&param_SubnetIDs%5B%5D=) and fill in the `OrgID` with the Organization ID you copied earlier. Please select your VPC and all subnet IDS.
+   - Next utilize [this CloudFormation Link](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https%3A%2F%2Fcircleci-bootcamp.s3.amazonaws.com%2Flab-1-complete-template.yml&stackName=lab1-complete&param_OrgId=&param_LoadBalancerName=ambassador&param_RoleName=ambassador&param_CertificateThumbprint=9e99a48a9960b14926bb7f3b02e22da2b0ab7280&param_SecurityGroupName=ambassador&param_VpcID=&param_ECSTaskExecutionRole=ecsTaskExecutionRoleAmbassador&param_ClusterName=ambassador&param_RepositoryName=ambassador&param_SubnetIDs%5B%5D=) and fill in the `OrgID` with the Organization ID you copied earlier. Please select your VPC and all subnet IDS.
 
 ### Objectives
 - Successfully fork the specified GitHub repository.

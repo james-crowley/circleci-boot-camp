@@ -1,5 +1,5 @@
 Description: |
-  AWS Ambassador: Create various services for CircleCI's second lab. The primary AWS resources to be created are 
+  CircleCI Boot Camp: Create various services for CircleCI's second lab. The primary AWS resources to be created are 
   EC2 and security group.  
 Parameters:
   EC2Name:
@@ -36,8 +36,18 @@ Resources:
                     VolumeType: "gp3"
                     DeleteOnTermination: true
             Tags: 
-              - Key: "CreatedBy"
-                Value: "CircleCI"
+              - Key: "cost-center"
+                Value: "sm"
+              - Key: "Team"
+                Value: "Customer Engineering"
+              - Key: "asset-criticality"
+                Value: "false"
+              - Key: "optimization-opt-in"
+                Value: "false"
+              - Key: "iac"
+                Value: "true"
+              - Key: "owner"
+                Value: "field@circleci.com"
               - Key: "Name"
                 Value: !Ref EC2Name
   
@@ -45,8 +55,18 @@ Resources:
         Type: "AWS::EC2::SecurityGroup"
         Properties:
             Tags: 
-              - Key: "CreatedBy"
-                Value: "CircleCI"
+              - Key: "cost-center"
+                Value: "sm"
+              - Key: "Team"
+                Value: "Customer Engineering"
+              - Key: "asset-criticality"
+                Value: "false"
+              - Key: "optimization-opt-in"
+                Value: "false"
+              - Key: "iac"
+                Value: "true"
+              - Key: "owner"
+                Value: "field@circleci.com"
             GroupDescription: "Allow port 22, 80 and 8080 for any inbound IP"
             GroupName: !Ref SecurityGroupName
             VpcId: !Ref VpcID

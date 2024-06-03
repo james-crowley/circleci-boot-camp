@@ -1,5 +1,5 @@
 Description: |
-  AWS Ambassador: Create various services for CircleCI's first lab. The primary AWS resources to be created are 
+  CircleCi Boot Camp: Create various services for CircleCI's first lab. The primary AWS resources to be created are 
   ECR public registry, ECS Cluster, Application Load Balancer, OIDC Provider, IAM Roles and security group.  
 Parameters:
   OrgId:
@@ -49,8 +49,18 @@ Resources:
     Type: AWS::IAM::OIDCProvider
     Properties:
       Tags: 
-        - Key: "CreatedBy"
-          Value: "CircleCI"
+        - Key: "cost-center"
+          Value: "sm"
+        - Key: "Team"
+          Value: "Customer Engineering"
+        - Key: "asset-criticality"
+          Value: "false"
+        - Key: "optimization-opt-in"
+          Value: "false"
+        - Key: "iac"
+          Value: "true"
+        - Key: "owner"
+          Value: "field@circleci.com"
       ClientIdList:
         - !Ref OrgId
       Url: !Sub 'https://oidc.circleci.com/org/${OrgId}'
@@ -61,8 +71,18 @@ Resources:
     Type: AWS::IAM::Role
     Properties:
       Tags: 
-        - Key: "CreatedBy"
-          Value: "CircleCI"
+        - Key: "cost-center"
+          Value: "sm"
+        - Key: "Team"
+          Value: "Customer Engineering"
+        - Key: "asset-criticality"
+          Value: "false"
+        - Key: "optimization-opt-in"
+          Value: "false"
+        - Key: "iac"
+          Value: "true"
+        - Key: "owner"
+          Value: "field@circleci.com"
       RoleName: !Ref RoleName
       Description: Allow CircleCI jobs authenticated through OIDC to manage AWS resources
       AssumeRolePolicyDocument: !Sub
@@ -95,8 +115,18 @@ Resources:
     Type: "AWS::IAM::Role"
     Properties:
       Tags: 
-        - Key: "CreatedBy"
-          Value: "CircleCI"
+        - Key: "cost-center"
+          Value: "sm"
+        - Key: "Team"
+          Value: "Customer Engineering"
+        - Key: "asset-criticality"
+          Value: "false"
+        - Key: "optimization-opt-in"
+          Value: "false"
+        - Key: "iac"
+          Value: "true"
+        - Key: "owner"
+          Value: "field@circleci.com"
       Path: "/"
       RoleName: !Ref ECSTaskExecutionRole
       AssumeRolePolicyDocument: "{\"Version\":\"2008-10-17\",\"Statement\":[{\"Sid\":\"\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"ecs-tasks.amazonaws.com\"},\"Action\":\"sts:AssumeRole\"}]}"
@@ -108,19 +138,39 @@ Resources:
     Type: "AWS::ECR::PublicRepository"
     Properties:
       Tags: 
-        - Key: "CreatedBy"
-          Value: "CircleCI"
+        - Key: "cost-center"
+          Value: "sm"
+        - Key: "Team"
+          Value: "Customer Engineering"
+        - Key: "asset-criticality"
+          Value: "false"
+        - Key: "optimization-opt-in"
+          Value: "false"
+        - Key: "iac"
+          Value: "true"
+        - Key: "owner"
+          Value: "field@circleci.com"
       RepositoryName: !Ref RepositoryName
       RepositoryCatalogData: 
-          UsageText: "AWS Ambassador - Lab 1 - CircleCI"
-          AboutText: "AWS Ambassador - Lab 1 - CircleCI"
+          UsageText: "Boot Camp - Lab 1 - CircleCI"
+          AboutText: "Boot Camp - Lab 1 - CircleCI"
 
   EC2SecurityGroup:
     Type: "AWS::EC2::SecurityGroup"
     Properties:
       Tags: 
-        - Key: "CreatedBy"
-          Value: "CircleCI"
+        - Key: "cost-center"
+          Value: "sm"
+        - Key: "Team"
+          Value: "Customer Engineering"
+        - Key: "asset-criticality"
+          Value: "false"
+        - Key: "optimization-opt-in"
+          Value: "false"
+        - Key: "iac"
+          Value: "true"
+        - Key: "owner"
+          Value: "field@circleci.com"
       GroupDescription: "Allow port 80 and 8080 for any inbound IP"
       GroupName: !Ref SecurityGroupName
       VpcId: !Ref VpcID
@@ -149,8 +199,18 @@ Resources:
     Type: "AWS::ECS::Cluster"
     Properties:
       Tags: 
-        - Key: "CreatedBy"
-          Value: "CircleCI"
+        - Key: "cost-center"
+          Value: "sm"
+        - Key: "Team"
+          Value: "Customer Engineering"
+        - Key: "asset-criticality"
+          Value: "false"
+        - Key: "optimization-opt-in"
+          Value: "false"
+        - Key: "iac"
+          Value: "true"
+        - Key: "owner"
+          Value: "field@circleci.com"
       ClusterName: !Ref ClusterName
       CapacityProviders: 
         - "FARGATE"
@@ -162,8 +222,18 @@ Resources:
       - ECSRole
     Properties:
       Tags: 
-        - Key: "CreatedBy"
-          Value: "CircleCI"
+        - Key: "cost-center"
+          Value: "sm"
+        - Key: "Team"
+          Value: "Customer Engineering"
+        - Key: "asset-criticality"
+          Value: "false"
+        - Key: "optimization-opt-in"
+          Value: "false"
+        - Key: "iac"
+          Value: "true"
+        - Key: "owner"
+          Value: "field@circleci.com"
       ContainerDefinitions: 
         - Essential: true
           Image: "public.ecr.aws/o5b1w9d8/ambassador:latest"
@@ -190,8 +260,18 @@ Resources:
       - ECSRole
     Properties:
         Tags: 
-          - Key: "CreatedBy"
-            Value: "CircleCI"
+          - Key: "cost-center"
+            Value: "sm"
+          - Key: "Team"
+            Value: "Customer Engineering"
+          - Key: "asset-criticality"
+            Value: "false"
+          - Key: "optimization-opt-in"
+            Value: "false"
+          - Key: "iac"
+            Value: "true"
+          - Key: "owner"
+            Value: "field@circleci.com"
         ContainerDefinitions: 
           - Essential: true
             Image: "public.ecr.aws/o5b1w9d8/ambassador:latest"
@@ -216,8 +296,18 @@ Resources:
     Type: "AWS::ElasticLoadBalancingV2::LoadBalancer"
     Properties:
         Tags: 
-          - Key: "CreatedBy"
-            Value: "CircleCI"
+          - Key: "cost-center"
+            Value: "sm"
+          - Key: "Team"
+            Value: "Customer Engineering"
+          - Key: "asset-criticality"
+            Value: "false"
+          - Key: "optimization-opt-in"
+            Value: "false"
+          - Key: "iac"
+            Value: "true"
+          - Key: "owner"
+            Value: "field@circleci.com"
         Name: !Ref LoadBalancerName
         Scheme: "internet-facing"
         Type: "application"
@@ -275,8 +365,18 @@ Resources:
       - ElasticLoadBalancingV2LoadBalancer
     Properties:
         Tags: 
-          - Key: "CreatedBy"
-            Value: "CircleCI"
+          - Key: "cost-center"
+            Value: "sm"
+          - Key: "Team"
+            Value: "Customer Engineering"
+          - Key: "asset-criticality"
+            Value: "false"
+          - Key: "optimization-opt-in"
+            Value: "false"
+          - Key: "iac"
+            Value: "true"
+          - Key: "owner"
+            Value: "field@circleci.com"
         HealthCheckIntervalSeconds: 30
         HealthCheckPath: "/"
         Port: 80
@@ -342,8 +442,18 @@ Resources:
       - ElasticLoadBalancingV2Listener
     Properties:
         Tags: 
-          - Key: "CreatedBy"
-            Value: "CircleCI"
+          - Key: "cost-center"
+            Value: "sm"
+          - Key: "Team"
+            Value: "Customer Engineering"
+          - Key: "asset-criticality"
+            Value: "false"
+          - Key: "optimization-opt-in"
+            Value: "false"
+          - Key: "iac"
+            Value: "true"
+          - Key: "owner"
+            Value: "field@circleci.com"
         ServiceName: !Sub "${ClusterName}-amd"
         Cluster: !GetAtt ECSCluster.Arn
         LoadBalancers: 
@@ -381,8 +491,18 @@ Resources:
       - ElasticLoadBalancingV2Listener
     Properties:
         Tags: 
-          - Key: "CreatedBy"
-            Value: "CircleCI"
+          - Key: "cost-center"
+            Value: "sm"
+          - Key: "Team"
+            Value: "Customer Engineering"
+          - Key: "asset-criticality"
+            Value: "false"
+          - Key: "optimization-opt-in"
+            Value: "false"
+          - Key: "iac"
+            Value: "true"
+          - Key: "owner"
+            Value: "field@circleci.com"
         ServiceName: !Sub "${ClusterName}-arm"
         Cluster: !GetAtt ECSCluster.Arn
         LoadBalancers: 
