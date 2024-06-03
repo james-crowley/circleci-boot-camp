@@ -1,6 +1,6 @@
-# AWS Ambassador - Guardrails at Scale: Ensuring Compliance and Security in the Enterprise with CircleCI
+# Guardrails at Scale: Ensuring Compliance and Security in the Enterprise with CircleCI
 
-Welcome to the second hands-on lab for the AWS Ambassador CircleCI program! This repository contains all the code and resources needed to complete the lab titled "Guardrails at Scale: Ensuring Compliance and Security in the Enterprise with CircleCI." In this lab, we focus on implementing guardrails and best practices to ensure compliance and security within enterprise CI/CD pipelines using CircleCI.
+Welcome to the second hands-on lab for the CircleCI Boot Camp! This repository contains all the code and resources needed to complete the lab titled "Guardrails at Scale: Ensuring Compliance and Security in the Enterprise with CircleCI." In this lab, we focus on implementing guardrails and best practices to ensure compliance and security within enterprise CI/CD pipelines using CircleCI.
 
 
 ## Prerequisites
