@@ -18,7 +18,7 @@ parameters:
 
 commands:
   run-pytest:
-    description: "Run PyTest"
+    description: "Run PyTest!"
     parameters:
       requirements-path:
         type: string
