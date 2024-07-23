@@ -11,10 +11,10 @@ orbs:
 parameters:
   role-arn:
     type: string
-    default: arn:aws:iam::992382483259:role/ambassador-jc
+    default: arn:aws:iam::992382483259:role/ambassador-webinar
   aws-name:
     type: string
-    default: ambassador-jc
+    default: ambassador-webinar
 
 commands:
   run-pytest:
